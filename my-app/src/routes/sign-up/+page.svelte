@@ -1,33 +1,69 @@
 <script>
-    // import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
-    // import { goto } from '$app/navigation';
+    import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+    import { goto } from '$app/navigation';
+    import { authenticateUser } from '../../utils/auth.js'
 
     let formErrors = {};
-    async function createUser(){
-
+    
+    async function postSignUp(){
+        goto('/');
     }
+
+    async function createUser(evt){
+        evt.preventDefault()
+        
+        if (evt.target['password'].value != evt.target['password-confirmation'].value){
+            formErrors['password'] = { message: 'Password does not match'};
+            return;
+        }
+        
+        const userData = {
+            name:evt.target['name'].value,
+            email:evt.target['email'].value,
+            password:evt.target['password'].value,
+        };
+        const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/sign-up',{
+            method:'POST',
+            mode:'cors',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        if (resp.status == 200){
+            // const res = await authenticateUser(userData.email, userData.password);
+
+            // if(res.success){
+                postSignUp();
+            // } else {
+            //     throw 'Sign up success but authentication failed'
+            // }
+        } else {
+            const res = await resp.json();
+            formErrors = res.data;
+        }
+    }
+
   </script>
   
-  <h1 class="text-center text-xl">Create an Account to Post a Job</h1>
+  <h1 class="text-center text-xl">Sign up</h1>
   <div class="text-center">
       <a class="link-hover italic text-xs" href="/login">Already have an account? Click here to login instead.</a>
   </div>
   <div class="flex justify-center items-center mt-8">
       <form on:submit={createUser} class="w-1/3">
-          <div class="form-control w-full">
-              <label class="label" for="username">
-                  <span class="label-text">Username</span>
-              </label>
-              <input type="text" 
-                     name="username" 
-                     placeholder="example" 
-                     class="input input-bordered w-full" />
-              {#if 'username' in formErrors}
-              <label class="label" for="username">
-                  <span class="label-text-alt text-red-500">{formErrors['username'].message}</span>
-              </label>
-              {/if}
-          </div>
+        <div class="form-comntrol w-full">
+            <label class="label" for="name">
+                <span class="label-text">Name</span>
+            </label>
+            <input type="name" name="name" placeholder="Name" class="input input-bordered w-full" required />
+            {#if 'name' in formErrors}
+            <label class="label" for="name">
+                <span class="label-text-alt text-red-500">{formErrors['name'].message}</span>
+            </label>
+            {/if}
+        </div>   
   
           <div class="form-control w-full">
               <label class="label" for="email">
