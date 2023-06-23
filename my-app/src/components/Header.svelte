@@ -16,9 +16,12 @@
             <button class= "btn">
                 <a href='/sign-up'>Sign Up</a>
             </button>
+            <button class="btn">
+				<a href="/login">Log In</a>
+			</button>
         {:else}
         <button class="btn">
-            <a href="">Picutres</a>
+            <a href="">Pictures</a>
         </button>
         <button class="btn" on:click={logOut}>Log Out</button>
         {/if}
