@@ -7,14 +7,15 @@
     import { goto } from '$app/navigation';
     import { getTokenFromLocalStorage } from '../../../../utils/auth.js';
     import { uploadMedia } from '../src/utils/s3-uploader.js'
-  
+    let formErrors = {};
+    
     function afterUpload(){
       goto('/')
     }
 
     async function uploadImage(evt) {
       evt.preventDefault();
-      formErrors = {};
+
       const [fileName, fileUrl] = await uploadMedia(evt.target['file'].files[0]);
       const token = getTokenFromLocalStorage();
 
@@ -90,10 +91,5 @@
       </label>
       {/if}
     </div>
-  
-
-    
-    <div class="form-control w-full mt-4">
-      <button class="btn btn-md">Upload</button>
-    </div>
   </form>
+</div>
