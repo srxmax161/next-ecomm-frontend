@@ -91,12 +91,7 @@
       <label class="label" for="description">
         <span class="label-text text-lena-hair">Description</span>
       </label>
-      <textarea name="description" placeholder="Description of image" class="textarea textarea-bordered w-full placeholder-lena-uniform bg-lena-hair"></textarea>
-      <!-- {#if 'description' in formErrors}
-      <label class="label" for="description">
-        <span class="label-text-alt text-red-500">{formErrors['description'].message}</span>
-      </label>
-      {/if} -->
+      <div name="description" placeholder="Description of image" class="textarea textarea-bordered w-full placeholder-lena-uniform bg-lena-hair"></div>
     </div>
 
     <div class="form-control w-full mb-3">

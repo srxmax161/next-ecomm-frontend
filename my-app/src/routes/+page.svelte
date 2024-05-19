@@ -11,6 +11,7 @@
 
 </script>
 
+<title class>WaifuVerse</title>
 <div class="bg-gradient-to-r from-lena-uniform via-lena-iris to-lena-uniform">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10 mx-auto pt-10 pb-10" style="width: 1200px;">
     {#each paginationData as image}
